@@ -1,0 +1,30 @@
+name: Index Search Data
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # Every 10 minutes
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Search Index
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST \
+            -H "Authkey: ${{ secrets.INDEX_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            "${{ secrets.API_BASE_URL }}/profile/search/index/sync")
+          
+          echo "Response status: $response"
+          
+          if [ "$response" -eq 202 ]; then
+            echo "Index generation submitted successfully."
+          elif [ "$response" -eq 401 ]; then
+            echo "Authentication failed. Check API_ADMIN_TOKEN secret."
+            exit 1
+          else
+            echo "Unexpected response: $response"
+            exit 1
+          fi
