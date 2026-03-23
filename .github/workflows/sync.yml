@@ -9,7 +9,7 @@ jobs:
   index:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Search Index
+      - name: Trigger Profile Search Index
         run: |
           response=$(curl -s -o /dev/null -w "%{http_code}" \
             -X POST \
@@ -17,12 +17,32 @@ jobs:
             -H "Content-Type: application/json" \
             "${{ secrets.API_BASE_URL }}/profile/search/index/sync")
           
-          echo "Response status: $response"
+          echo "Profile Index Response: $response"
           
           if [ "$response" -eq 202 ]; then
-            echo "Index generation submitted successfully."
+            echo "Profile index generation submitted successfully."
           elif [ "$response" -eq 401 ]; then
-            echo "Authentication failed. Check API_ADMIN_TOKEN secret."
+            echo "Authentication failed. Check INDEX_API_KEY secret."
+            exit 1
+          else
+            echo "Unexpected response: $response"
+            exit 1
+          fi
+
+      - name: Trigger Business Search Index
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST \
+            -H "Authkey: ${{ secrets.INDEX_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            "${{ secrets.API_BASE_URL }}/business/search/index/sync")
+          
+          echo "Business Index Response: $response"
+          
+          if [ "$response" -eq 202 ]; then
+            echo "Business index generation submitted successfully."
+          elif [ "$response" -eq 401 ]; then
+            echo "Authentication failed. Check INDEX_API_KEY secret."
             exit 1
           else
             echo "Unexpected response: $response"
