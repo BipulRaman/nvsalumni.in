@@ -1,1 +1,0 @@
-import{r as e}from"./rolldown-runtime-Dw2cE7zH.js";import{_t as t}from"./mui-core-BNDCge0_.js";var n=e(t(),1),r=e=>{(0,n.useEffect)(()=>{if(e)return document.documentElement.classList.add(`modal-open`),()=>{document.documentElement.classList.remove(`modal-open`)}},[e])};export{r as t};

@@ -1,1 +1,0 @@
-import{r as e}from"./rolldown-runtime-Dw2cE7zH.js";import{_t as t}from"./mui-core-BNDCge0_.js";var n=e(t(),1),r=(0,n.createContext)(()=>{console.warn(`UpdateKeyContext.Provider was not found`)}),i=()=>(0,n.useContext)(r),a=()=>{let[e,t]=(0,n.useState)(Date.now());return{key:e,updateKey:(0,n.useCallback)(()=>{t(Date.now())},[])}};export{a as n,i as r,r as t};

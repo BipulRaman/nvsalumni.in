@@ -1,0 +1,1 @@
+import{at as e,gt as t}from"./mui-core-C2fRbKk0.js";import{i as n,t as r}from"./ThemeConstants-CHnWGRLx.js";var i=t(),a=t=>(0,i.jsx)(e,{variant:`h5`,sx:{fontWeight:n.medium,color:r.textPrimary,mb:2},...t}),o=t=>(0,i.jsx)(e,{variant:`h6`,sx:{fontWeight:n.medium,color:r.textPrimary,mb:1.5},...t});export{o as n,a as t};
