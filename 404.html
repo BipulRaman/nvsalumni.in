@@ -33,7 +33,7 @@
         width: 120px;
         height: 120px;
         object-fit: contain;
-        animation: splash-pulse 1.6s ease-in-out infinite;
+        animation: splash-spin 2.5s linear infinite;
       }
       #splash .splash-name {
         margin-top: 20px;
@@ -53,15 +53,15 @@
         opacity: 0;
         animation: splash-fade-in 0.8s ease-out 0.6s forwards;
       }
-      @keyframes splash-pulse {
-        0%, 100% { transform: scale(1); opacity: 0.85; }
-        50% { transform: scale(1.08); opacity: 1; }
+      @keyframes splash-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
       }
       @keyframes splash-fade-in {
         to { opacity: 1; }
       }
     </style>
-    <script type="module" crossorigin src="/assets/index-CcVAXmih.js"></script>
+    <script type="module" crossorigin src="/assets/index-qKTIyZUd.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-Dw2cE7zH.js">
     <link rel="modulepreload" crossorigin href="/assets/preload-helper-CM8YhcCa.js">
     <link rel="modulepreload" crossorigin href="/assets/mui-core-BNDCge0_.js">
@@ -72,7 +72,7 @@
     <link rel="modulepreload" crossorigin href="/assets/store-CD0FZNCE.js">
     <link rel="modulepreload" crossorigin href="/assets/EnvConfig-CrvbURNn.js">
     <link rel="modulepreload" crossorigin href="/assets/Routes-D_4BCTmL.js">
-    <link rel="modulepreload" crossorigin href="/assets/ThemeConstants-B5FQSn0R.js">
+    <link rel="modulepreload" crossorigin href="/assets/ThemeConstants-CHnWGRLx.js">
     <link rel="modulepreload" crossorigin href="/assets/AuthContext-6p3i0UfX.js">
     <link rel="modulepreload" crossorigin href="/assets/UpdateKeyContext-C7M8QK7B.js">
     <link rel="modulepreload" crossorigin href="/assets/useBodyScrollLock-Ci0XSdpu.js">
