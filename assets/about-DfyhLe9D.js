@@ -1,0 +1,1 @@
+import{t as e}from"./About-3xXI217B.js";var t=e;export{t as component};
