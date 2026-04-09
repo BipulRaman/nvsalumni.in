@@ -1,0 +1,1 @@
+var e=window.SITE_CONFIG||{},t={SiteName:e.siteName||`Untitled`,SiteOwner:e.siteOwner||`Untitled`,SiteTagline:e.siteTagline||``,SiteLogo:e.siteLogo||``,ApiBasePath:`https://alumniapp.azurewebsites.net`};export{t};

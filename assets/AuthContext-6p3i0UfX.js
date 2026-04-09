@@ -1,0 +1,1 @@
+import{r as e}from"./rolldown-runtime-Dw2cE7zH.js";import{_t as t}from"./mui-core-BNDCge0_.js";var n=(0,e(t(),1).createContext)({authData:{name:``,email:``},isAuthenticated:!1,setIsAuthenticated:()=>{},setAuthData:()=>{}});export{n as t};

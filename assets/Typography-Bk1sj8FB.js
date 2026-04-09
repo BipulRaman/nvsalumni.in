@@ -1,0 +1,1 @@
+import{ht as e,it as t}from"./mui-core-BNDCge0_.js";import{r as n,t as r}from"./ThemeConstants-B5FQSn0R.js";var i=e(),a=e=>(0,i.jsx)(t,{variant:`h5`,sx:{fontWeight:n.medium,color:r.textPrimary,mb:2},...e}),o=e=>(0,i.jsx)(t,{variant:`h6`,sx:{fontWeight:n.medium,color:r.textPrimary,mb:1.5},...e});export{o as n,a as t};

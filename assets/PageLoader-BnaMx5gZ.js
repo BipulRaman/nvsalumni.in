@@ -1,0 +1,1 @@
+import{X as e,ht as t,st as n}from"./mui-core-BNDCge0_.js";var r=t(),i=()=>(0,r.jsx)(e,{sx:{display:`flex`,justifyContent:`center`,alignItems:`center`,minHeight:200},children:(0,r.jsx)(n,{})});export{i as t};
