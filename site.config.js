@@ -11,8 +11,8 @@
  * 4. Deploy — no rebuild needed
  */
 window.SITE_CONFIG = {
-  siteName: "Alumni Portal",
-  siteOwner: "Alumni Portal",
+  siteName: "Navodaya Alumni Portal",
+  siteOwner: "Navodaya Alumni Portal",
   siteTagline: "Connecting Navodayans!",
   siteLogo: "/branding/logo.webp",
 };

@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Navodaya Alumni Portal</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <meta name="theme-color" content="#1976d2" />
+    <meta name="description" content="A secure and privacy-focused platform for Navodayans to connect, search alumni, discover businesses and grow together." />
+    <meta name="keywords" content="Navodaya, Alumni, JNV, Jawahar Navodaya Vidyalaya, Alumni Portal, Navodayan, Connect" />
+    <meta name="author" content="Navodaya Alumni Portal" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Navodaya Alumni Portal — Connecting Navodayans" />
+    <meta property="og:description" content="Search alumni, discover businesses, find batchmates and connect with Navodayans." />
+    <meta property="og:image" content="/branding/logo.webp" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
     <script src="/site.config.js"></script>
     <script>
-      document.title = window.SITE_CONFIG?.siteName || 'App';
+      var cfg = window.SITE_CONFIG || {};
+      document.title = cfg.siteName || 'Navodaya Alumni Portal';
+      // Update OG tags from runtime config
+      if (cfg.siteName) {
+        document.querySelector('meta[property="og:title"]')?.setAttribute('content', cfg.siteName + ' — ' + (cfg.siteTagline || ''));
+      }
     </script>
-    <title>App</title>
+    
     <style>
       #splash {
         position: fixed;
