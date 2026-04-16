@@ -1,0 +1,1 @@
+import{_t as e}from"./mui-core-CitulGi0.js";import{a as t}from"./router-gENyEOdX.js";var n=e(),r=()=>(0,n.jsx)(`div`,{style:{paddingTop:`15px`,width:`100%`},children:(0,n.jsx)(t,{})});export{r as component};
