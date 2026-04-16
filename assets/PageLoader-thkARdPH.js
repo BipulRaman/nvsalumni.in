@@ -1,1 +1,0 @@
-import{Z as e,ct as t,gt as n}from"./mui-core-C2fRbKk0.js";var r=n(),i=()=>(0,r.jsx)(e,{sx:{display:`flex`,justifyContent:`center`,alignItems:`center`,minHeight:200},children:(0,r.jsx)(t,{})});export{i as t};

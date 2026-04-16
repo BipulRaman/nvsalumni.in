@@ -1,1 +1,0 @@
-import{gt as e}from"./mui-core-C2fRbKk0.js";import{a as t}from"./router-CDgU525x.js";var n=e(),r=()=>(0,n.jsx)(`div`,{style:{paddingTop:`15px`,width:`100%`},children:(0,n.jsx)(t,{})});export{r as component};
