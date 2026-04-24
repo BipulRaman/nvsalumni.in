@@ -13,14 +13,14 @@ jobs:
         run: |
           response=$(curl -s -o /dev/null -w "%{http_code}" \
             -X POST \
-            -H "Authkey: ${{ secrets.INDEX_API_KEY }}" \
+            -H "X-Api-Key: ${{ secrets.INDEX_API_KEY }}" \
             -H "Content-Type: application/json" \
-            "${{ secrets.API_BASE_URL }}/profile/search/index/sync")
+            "${{ secrets.API_BASE_URL }}/search/profiles/reindex")
           
           echo "Profile Index Response: $response"
           
-          if [ "$response" -eq 202 ]; then
-            echo "Profile index generation submitted successfully."
+          if [ "$response" -eq 204 ]; then
+            echo "Profile index rebuilt successfully."
           elif [ "$response" -eq 401 ]; then
             echo "Authentication failed. Check INDEX_API_KEY secret."
             exit 1
@@ -33,14 +33,14 @@ jobs:
         run: |
           response=$(curl -s -o /dev/null -w "%{http_code}" \
             -X POST \
-            -H "Authkey: ${{ secrets.INDEX_API_KEY }}" \
+            -H "X-Api-Key: ${{ secrets.INDEX_API_KEY }}" \
             -H "Content-Type: application/json" \
-            "${{ secrets.API_BASE_URL }}/business/search/index/sync")
+            "${{ secrets.API_BASE_URL }}/search/businesses/reindex")
           
           echo "Business Index Response: $response"
           
-          if [ "$response" -eq 202 ]; then
-            echo "Business index generation submitted successfully."
+          if [ "$response" -eq 204 ]; then
+            echo "Business index rebuilt successfully."
           elif [ "$response" -eq 401 ]; then
             echo "Authentication failed. Check INDEX_API_KEY secret."
             exit 1
