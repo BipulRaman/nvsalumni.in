@@ -1,1 +1,0 @@
-import{Z as e,_t as t,lt as n}from"./mui-core-CitulGi0.js";var r=t(),i=()=>(0,r.jsx)(e,{sx:{display:`flex`,justifyContent:`center`,alignItems:`center`,minHeight:200},children:(0,r.jsx)(n,{})});export{i as t};

@@ -1,0 +1,1 @@
+import{t as e}from"./EnvConfig-CVFjQM56.js";var t=t=>t?/^https?:\/\//i.test(t)?t:`${e.PhotoBaseUrl?.endsWith(`/`)?e.PhotoBaseUrl:`${e.PhotoBaseUrl}/`}${t}`:``;export{t};
