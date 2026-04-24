@@ -1,0 +1,1 @@
+var e=window.SITE_CONFIG||{},t={SiteName:e.siteName||`Untitled`,SiteOwner:e.siteOwner||`Untitled`,SiteTagline:e.siteTagline||``,SiteLogo:e.siteLogo||``,SiteVersion:`dev`,ApiBasePath:`https://alumniapp.azurewebsites.net`,PhotoBaseUrl:`https://alumniappdata.blob.core.windows.net/alumni/profile-pic/`};export{t};
