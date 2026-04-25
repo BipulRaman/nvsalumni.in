@@ -1,0 +1,1 @@
+import{t as e}from"./EnvConfig-DQXwtLRo.js";var t=(t,n=!1)=>{if(!t)return``;if(/^https?:\/\//i.test(t))return n?`${t}?v=${Date.now()}`:t;let r=`${e.PhotoBaseUrl?.endsWith(`/`)?e.PhotoBaseUrl:`${e.PhotoBaseUrl}/`}${t}`;return n?`${r}?v=${Date.now()}`:r};export{t};
