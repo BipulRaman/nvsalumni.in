@@ -1,1 +1,0 @@
-import{n as e}from"./common-CecEGseO.js";function t(e){return e&&typeof e==`object`?e:{}}function n(n){let r=t(n);return{httpStatus:r.response?.status??0,correlationId:e(n),message:r.response?.data?.message??r.message}}function r(e){return t(e).response?.status??0}export{r as n,n as t};

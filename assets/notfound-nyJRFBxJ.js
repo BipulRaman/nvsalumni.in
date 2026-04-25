@@ -1,0 +1,1 @@
+import{t as e}from"./NotFound-Bd9l4Qo3.js";var t=e;export{t as component};

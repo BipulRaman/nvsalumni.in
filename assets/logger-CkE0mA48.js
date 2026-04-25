@@ -1,1 +1,0 @@
-function e(e,t,n,...r){if(e===`debug`||e===`info`)return;let i=`[${t}]`;(e===`error`?console.error:e===`warn`?console.warn:e===`info`?console.info:console.debug)(i,n,...r)}var t={debug:(t,n,...r)=>e(`debug`,t,n,...r),info:(t,n,...r)=>e(`info`,t,n,...r),warn:(t,n,...r)=>e(`warn`,t,n,...r),error:(t,n,...r)=>e(`error`,t,n,...r)};export{t};
