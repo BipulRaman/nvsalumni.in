@@ -1,0 +1,1 @@
+import{ct as e,yt as t}from"./mui-core-DlvuAFro.js";import{o as n}from"./ThemeConstants-CwV47o4S.js";var r=t(),i=t=>(0,r.jsx)(e,{variant:`h5`,sx:{fontWeight:n.medium,color:`text.primary`,mb:2},...t}),a=t=>(0,r.jsx)(e,{variant:`h6`,sx:{fontWeight:n.medium,color:`text.primary`,mb:1.5},...t});export{a as n,i as t};
