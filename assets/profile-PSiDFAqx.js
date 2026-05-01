@@ -1,0 +1,1 @@
+import{Ct as e}from"./mui-core-CMNbDeOO.js";import{s as t}from"./Routes-BT48-26Y.js";import{t as n}from"./PageTabs-Btwme5Y5.js";import{t as r}from"./ProfileView-BLNlUSY8.js";var i=e();function a(){return(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(n,{tabs:t}),(0,i.jsx)(r,{})]})}export{a as component};
