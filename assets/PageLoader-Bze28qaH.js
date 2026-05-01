@@ -1,0 +1,1 @@
+import{Ct as e,ht as t,nt as n}from"./mui-core-CMNbDeOO.js";var r=e(),i=()=>(0,r.jsx)(n,{sx:{display:`flex`,justifyContent:`center`,alignItems:`center`,minHeight:200},children:(0,r.jsx)(t,{})});export{i as t};

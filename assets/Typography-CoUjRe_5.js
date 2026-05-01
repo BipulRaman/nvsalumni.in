@@ -1,1 +1,0 @@
-import{ut as e,xt as t}from"./mui-core-CGWoPH1L.js";import{o as n}from"./ThemeConstants-OsWArdDu.js";var r=t(),i=t=>(0,r.jsx)(e,{variant:`h5`,sx:{fontWeight:n.medium,color:`text.primary`,mb:2},...t}),a=t=>(0,r.jsx)(e,{variant:`h6`,sx:{fontWeight:n.medium,color:`text.primary`,mb:1.5},...t});export{a as n,i as t};
