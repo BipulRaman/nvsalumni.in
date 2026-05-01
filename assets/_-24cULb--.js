@@ -1,1 +1,0 @@
-import{yt as e}from"./mui-core-DlvuAFro.js";var t=e(),n=()=>(0,t.jsxs)(`div`,{style:{padding:`40px`,textAlign:`center`},children:[(0,t.jsx)(`h2`,{children:`Page Not Found`}),(0,t.jsx)(`p`,{children:`The page you are looking for does not exist.`})]});export{n as component};

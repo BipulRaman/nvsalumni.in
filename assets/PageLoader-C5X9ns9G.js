@@ -1,1 +1,0 @@
-import{$ as e,dt as t,yt as n}from"./mui-core-DlvuAFro.js";var r=n(),i=()=>(0,r.jsx)(e,{sx:{display:`flex`,justifyContent:`center`,alignItems:`center`,minHeight:200},children:(0,r.jsx)(t,{})});export{i as t};

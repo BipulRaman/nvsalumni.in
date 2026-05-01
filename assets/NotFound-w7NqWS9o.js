@@ -1,1 +1,0 @@
-import"./rolldown-runtime-Dw2cE7zH.js";import{$ as e,xt as t,yt as n}from"./mui-core-DlvuAFro.js";import{t as r}from"./PageCard-Dn2tC0pX.js";import{t as i}from"./PageHeader-DDUCp2CD.js";t();var a=n(),o=()=>(0,a.jsx)(e,{sx:{mt:6},children:(0,a.jsx)(r,{children:(0,a.jsx)(i,{title:`Page not found!`,subtitle:`We couldn't find the requested page on this website.`})})});export{o as t};
