@@ -1,0 +1,1 @@
+import{St as e,v as t}from"./mui-core-qdYrO26p.js";var n=e(),r=e=>{let{sx:r,...i}=e;return(0,n.jsx)(t,{spacing:2,sx:{margin:2,maxWidth:400,...r},...i})};export{r as t};
