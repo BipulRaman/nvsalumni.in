@@ -1,1 +1,0 @@
-import{i as e}from"./api.types-dYsI8efO.js";var t=(t,n)=>!t||n.includes(e.SuperAdmin)?!0:(Array.isArray(t)?t:[t]).some(e=>n.includes(e));export{t};
