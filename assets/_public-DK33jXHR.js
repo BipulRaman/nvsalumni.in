@@ -1,0 +1,1 @@
+import{Ct as e}from"./mui-core-C-s1pTst.js";import{a as t}from"./router-DiQLINrM.js";var n=e(),r=()=>(0,n.jsx)(`div`,{style:{paddingTop:`15px`,width:`100%`},children:(0,n.jsx)(t,{})});export{r as component};
