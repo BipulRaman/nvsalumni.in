@@ -1,1 +1,0 @@
-import{i as e}from"./api.types-BO5_5TTS.js";import{s as t}from"./token-DHqNOZIB.js";var n=()=>{let n=t();return n.includes(e.Admin)||n.includes(e.SuperAdmin)};export{n as t};
