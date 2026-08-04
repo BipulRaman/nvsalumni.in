@@ -1,0 +1,1 @@
+import{t as e}from"./NotFound-srpeP8l6.js";var t=e;export{t as component};
