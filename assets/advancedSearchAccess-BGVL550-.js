@@ -1,0 +1,1 @@
+import{i as e}from"./api.types-BeIyZHGs.js";import{s as t}from"./token-BrPdBD0y.js";var n=()=>{let n=t();return n.includes(e.Admin)||n.includes(e.SuperAdmin)};export{n as t};
