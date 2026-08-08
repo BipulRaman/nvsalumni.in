@@ -1,0 +1,1 @@
+import{i as e}from"./api.types-DhuOSpVd.js";import{s as t}from"./token-pVpXj4vm.js";var n=()=>{let n=t();return n.includes(e.Admin)||n.includes(e.SuperAdmin)};export{n as t};
