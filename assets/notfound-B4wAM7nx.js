@@ -1,1 +1,0 @@
-import{t as e}from"./NotFound-ltZ0-EFm.js";var t=e;export{t as component};
