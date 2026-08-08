@@ -1,1 +1,0 @@
-import{i as e}from"./api.types-BqrlzhVi.js";import{s as t}from"./token-CSPWrtLL.js";var n=()=>{let n=t();return n.includes(e.Admin)||n.includes(e.SuperAdmin)};export{n as t};
