@@ -1,0 +1,1 @@
+import{r as e,t}from"./roles-BhKnfeCX.js";import{s as n}from"./token-f-Zt3_cR.js";var r=()=>e(t.Admin_SuperAdmin,n());export{r as t};
