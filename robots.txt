@@ -1,21 +1,2 @@
-# The alumni directory sits behind sign-in and holds personal data, so crawling is
-# deny-by-default: only the pages that are public by design are opened up below.
-# Conflicts resolve by longest match, so the event management paths stay blocked
-# even though /events/ is allowed.
 User-agent: *
-
-# Public pages.
-Allow: /$
-Allow: /events/
-Allow: /about
-Allow: /privacy
-Allow: /disclaimer
-Allow: /license
-
-# Event management screens live under /events/ but need sign-in.
-Disallow: /events/all
-Disallow: /events/create
-Disallow: /events/edit
-
-# Everything else: member areas, admin tooling, profiles and auth flows.
-Disallow: /
+Disallow: *
