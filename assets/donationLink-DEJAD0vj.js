@@ -1,0 +1,1 @@
+var e=/^[a-zA-Z0-9][a-zA-Z0-9._-]{1,255}@[a-zA-Z][a-zA-Z0-9.]{1,63}$/,t=/^(https?|ftp):\/\/\S+$/i,n=t=>!!t&&e.test(t.trim()),r=n=>{let r=n?.trim()??``;return!r||t.test(r)||e.test(r)};export{r as n,n as t};
