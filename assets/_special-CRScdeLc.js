@@ -1,0 +1,1 @@
+import{At as e}from"./mui-core-CkVHs32U.js";import{a as t}from"./router-BZ4bk8SA.js";var n=e(),r=()=>(0,n.jsx)(`div`,{style:{paddingTop:`15px`,width:`100%`},children:(0,n.jsx)(t,{})});export{r as component};
