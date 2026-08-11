@@ -1,0 +1,262 @@
+# Generates a page per event so shared event links get a proper preview.
+#
+# ─── SETUP ─────────────────────────────────────────────────────────────────────
+# This file belongs in the repository that serves the site, NOT in the app repo:
+#
+#     <site-repo>/.github/workflows/Generate_EventPages.yml
+#
+# It is standalone: no checkout of the app, no npm install, no build, no secrets
+# beyond the built-in GITHUB_TOKEN. Everything it needs is already in the
+# deployed site. Check the env values below match your setup, then commit.
+# ───────────────────────────────────────────────────────────────────────────────
+#
+# WHY IT EXISTS
+# The site is a client-rendered SPA on GitHub Pages, which has no rewrite rules:
+# a URL only answers HTTP 200 when a real file exists at that path. Without this,
+# /events/<id> falls through to 404.html. Browsers render that body anyway, so
+# the page looks fine to a visitor — but WhatsApp, LinkedIn and Slack refuse to
+# build a preview for a 404, so shared event links show no card at all.
+#
+# HOW IT WORKS
+# events/id/index.html is shipped by the app build as a template: the ordinary
+# SPA shell with generic Event metadata in its <head>. This job copies that file
+# to events/<real-id>/index.html for every event from the API, rewriting only the
+# metadata. The body and every script/link tag are untouched, so each event page
+# loads exactly the same JS and CSS bundles as the rest of the site and behaves
+# identically once React mounts. Nothing here duplicates the app.
+#
+# The generated tags only affect crawlers. A visitor's browser fetches live event
+# data from the API on load, so a page is never stale to a real user — at worst a
+# preview card lags behind an edit until the next run.
+
+name: Generate Event Pages
+
+on:
+  schedule:
+    # 02:00 UTC daily (07:30 IST). Event edits are rare, and WhatsApp caches a
+    # preview per URL for days, so a tighter loop would not make links fresher.
+    - cron: '0 2 * * *'
+  # Lets you regenerate immediately after adding or editing an event.
+  workflow_dispatch:
+
+# Two runs pushing the same branch would race and one would fail.
+concurrency:
+  group: generate-event-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  # Branch GitHub Pages serves this site from.
+  SITE_BRANCH: web
+  # Public events API. Anonymous access is enough.
+  API_BASE: https://alumniapp.azurewebsites.net
+  # Public origin, used for canonical and og:url.
+  SITE_ORIGIN: https://nvsalumni.in
+  # Template the app build publishes. If this file is missing the job stops
+  # rather than guessing, since a wrong template would break every event page.
+  TEMPLATE_PATH: events/id/index.html
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout published site
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.SITE_BRANCH }}
+
+      - name: Build event pages from the API
+        run: |
+          cat > "$RUNNER_TEMP/generate-event-pages.mjs" <<'SCRIPT_EOF'
+          import { readFile, writeFile, mkdir, readdir, rm } from 'node:fs/promises';
+          import { existsSync } from 'node:fs';
+          import path from 'node:path';
+
+          const siteDir = process.cwd();
+          const apiBase = process.env.API_BASE;
+          const origin = process.env.SITE_ORIGIN.replace(/\/$/, '');
+          const templatePath = path.join(siteDir, process.env.TEMPLATE_PATH);
+          const eventsDir = path.join(siteDir, 'events');
+
+          // Longest description a search result or social card shows before truncating.
+          const MAX_DESCRIPTION = 155;
+
+          if (!existsSync(templatePath)) {
+            throw new Error(
+              `template not found at ${process.env.TEMPLATE_PATH}. It is published by the app build; ` +
+              `deploy the app first, or correct TEMPLATE_PATH.`,
+            );
+          }
+          const template = await readFile(templatePath, 'utf8');
+
+          const escapeHtml = (value) =>
+            String(value)
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;');
+
+          // Replaces the tag's content in place, or appends it when the template lacks it.
+          const setMeta = (html, attr, key, content) => {
+            const pattern = new RegExp(
+              `(<meta\\s+[^>]*${attr}=["']${key}["'][^>]*content=["'])[^"']*(["'])`, 'i',
+            );
+            return pattern.test(html)
+              ? html.replace(pattern, `$1${escapeHtml(content)}$2`)
+              : html.replace('</head>', `  <meta ${attr}="${key}" content="${escapeHtml(content)}" />\n  </head>`);
+          };
+
+          const setLink = (html, rel, href) => {
+            const pattern = new RegExp(`(<link\\s+[^>]*rel=["']${rel}["'][^>]*href=["'])[^"']*(["'])`, 'i');
+            return pattern.test(html)
+              ? html.replace(pattern, `$1${escapeHtml(href)}$2`)
+              : html.replace('</head>', `  <link rel="${rel}" href="${escapeHtml(href)}" />\n  </head>`);
+          };
+
+          // A meta description renders no markup, so reduce the organiser's markdown to prose.
+          const toPlainText = (markdown) =>
+            (markdown ?? '')
+              .replace(/```[\s\S]*?```/g, ' ')
+              .replace(/`([^`]*)`/g, '$1')
+              .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+              .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+              .replace(/^\s{0,3}>+\s?/gm, ' ')
+              .replace(/^\s{0,3}#{1,6}\s*/gm, ' ')
+              .replace(/^\s{0,3}(?:[-*+]|\d+\.)\s+/gm, ' ')
+              .replace(/^\s{0,3}(?:[-*_]\s*){3,}$/gm, ' ')
+              .replace(/[*_~]/g, '')
+              .replace(/&nbsp;/gi, ' ')
+              .replace(/\s+/g, ' ')
+              .trim();
+
+          // Cuts on a word boundary so a description never ends mid-word.
+          const truncate = (text) => {
+            if (text.length <= MAX_DESCRIPTION) return text;
+            const clipped = text.slice(0, MAX_DESCRIPTION - 1);
+            const lastSpace = clipped.lastIndexOf(' ');
+            return `${(lastSpace > MAX_DESCRIPTION * 0.6 ? clipped.slice(0, lastSpace) : clipped).trimEnd()}…`;
+          };
+
+          // Reads the site name from the template so a rebrand needs no change here.
+          const siteName = (template.match(/<meta\s+property=["']og:site_name["']\s+content=["']([^"']*)["']/i)?.[1])
+            ?? (template.match(/<title>[^<]*\|\s*([^<]+)<\/title>/i)?.[1]?.trim())
+            ?? 'Alumni App';
+
+          // Pages through every event: links to past events must keep working after they
+          // drop off the upcoming list. Throws rather than returning a partial list, since
+          // the prune step below deletes anything it does not see.
+          const fetchAllEvents = async () => {
+            const events = [];
+            let continuationToken;
+            do {
+              const url = new URL('/events', apiBase);
+              url.searchParams.set('pageSize', '100');
+              if (continuationToken) url.searchParams.set('continuationToken', continuationToken);
+              const response = await fetch(url, { headers: { accept: 'application/json' } });
+              if (!response.ok) throw new Error(`${response.status} ${response.statusText} for ${url}`);
+              const result = (await response.json())?.result ?? {};
+              events.push(...(result.items ?? []));
+              continuationToken = result.continuationToken || undefined;
+            } while (continuationToken);
+            return events;
+          };
+
+          const renderEvent = (event) => {
+            const start = new Date(event.startDateTime);
+            const end = new Date(event.endDateTime);
+            const when = start.toLocaleDateString('en-IN', {
+              day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata',
+            });
+            const where = event.isOnlineMeeting ? 'Online' : event.location;
+            const summary = toPlainText(event.details);
+            const url = `${origin}/events/${event.id}`;
+            const title = `${event.title} | ${siteName}`;
+            // Lead with the date and place a searcher scans for, then as much of the
+            // organiser's own copy as fits the snippet a result shows.
+            const description = truncate([`${when} · ${where}.`, summary].filter(Boolean).join(' '));
+
+            let html = template.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+            html = setMeta(html, 'name', 'description', description);
+            html = setMeta(html, 'property', 'og:type', 'article');
+            html = setMeta(html, 'property', 'og:title', title);
+            html = setMeta(html, 'property', 'og:description', description);
+            html = setMeta(html, 'property', 'og:url', url);
+            html = setMeta(html, 'name', 'twitter:title', title);
+            html = setMeta(html, 'name', 'twitter:description', description);
+            html = setLink(html, 'canonical', url);
+
+            // Structured data lets search engines show the date and venue directly in
+            // results. Replaced rather than appended so repeat runs stay idempotent.
+            const structuredData = {
+              '@context': 'https://schema.org',
+              '@type': 'Event',
+              name: event.title,
+              description: summary,
+              startDate: start.toISOString(),
+              endDate: end.toISOString(),
+              eventAttendanceMode: event.isOnlineMeeting
+                ? 'https://schema.org/OnlineEventAttendanceMode'
+                : 'https://schema.org/OfflineEventAttendanceMode',
+              eventStatus: 'https://schema.org/EventScheduled',
+              location: event.isOnlineMeeting
+                ? { '@type': 'VirtualLocation', url }
+                : { '@type': 'Place', name: event.location, address: event.location },
+              organizer: { '@type': 'Organization', name: siteName, url: origin },
+            };
+            // A literal "</" inside the JSON would close the script element early.
+            const json = JSON.stringify(structuredData).replace(/</g, '\\u003c');
+            html = html.replace(/\s*<script\s+id=["']event-ld-json["'][\s\S]*?<\/script>/i, '');
+            html = html.replace(
+              '</head>',
+              `  <script id="event-ld-json" type="application/ld+json">${json}</script>\n  </head>`,
+            );
+            return html;
+          };
+
+          const events = await fetchAllEvents();
+
+          let written = 0;
+          for (const event of events) {
+            if (!event?.id) continue;
+            const outFile = path.join(eventsDir, event.id, 'index.html');
+            await mkdir(path.dirname(outFile), { recursive: true });
+            await writeFile(outFile, renderEvent(event), 'utf8');
+            written += 1;
+          }
+
+          // Drop pages for events that no longer exist, so their URLs stop answering 200.
+          // `id` is the template itself and must survive.
+          const liveIds = new Set(events.map((event) => event.id));
+          let pruned = 0;
+          if (existsSync(eventsDir)) {
+            for (const entry of await readdir(eventsDir, { withFileTypes: true })) {
+              if (!entry.isDirectory() || entry.name === 'id' || liveIds.has(entry.name)) continue;
+              await rm(path.join(eventsDir, entry.name), { recursive: true, force: true });
+              console.log(`pruned /events/${entry.name}`);
+              pruned += 1;
+            }
+          }
+
+          console.log(`generated ${written} event page(s), pruned ${pruned}`);
+          SCRIPT_EOF
+          node "$RUNNER_TEMP/generate-event-pages.mjs"
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          if [ -z "$(git status --porcelain)" ]; then
+            echo 'Event pages already up to date.'
+            exit 0
+          fi
+
+          git add -A
+          git commit -m 'chore: regenerate event pages'
+          # The app deploy replaces this branch wholesale, so rebase rather than fail if
+          # a deploy landed while this job was running.
+          git pull --rebase --autostash origin "$SITE_BRANCH"
+          git push origin HEAD:"$SITE_BRANCH"
