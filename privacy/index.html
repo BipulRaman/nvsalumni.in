@@ -83,22 +83,30 @@
         to { opacity: 1; }
       }
     </style>
-    <script type="module" crossorigin src="/assets/index-dON5Eo_a.js"></script>
+    <noscript>
+      <!-- The splash is a full-screen overlay removed by React; without JS it would hide the
+           static summary below it forever. -->
+      <style>
+        #splash { display: none; }
+      </style>
+    </noscript>
+    <script type="module" crossorigin src="/assets/index-B9s9xqi0.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-hePW80VL.js">
     <link rel="modulepreload" crossorigin href="/assets/mui-core-CkVHs32U.js">
     <link rel="modulepreload" crossorigin href="/assets/react-vendor-CzFFv0e7.js">
     <link rel="modulepreload" crossorigin href="/assets/router-BZ4bk8SA.js">
     <link rel="modulepreload" crossorigin href="/assets/mui-icons-1aSrjnDA.js">
     <link rel="modulepreload" crossorigin href="/assets/roles-CwCbOD04.js">
-    <link rel="modulepreload" crossorigin href="/assets/EnvConfig-hrhz45O6.js">
+    <link rel="modulepreload" crossorigin href="/assets/EnvConfig-LEvUmhKN.js">
     <link rel="modulepreload" crossorigin href="/assets/token-pZEvZecO.js">
     <link rel="modulepreload" crossorigin href="/assets/axios-DhiQ7QLW.js">
-    <link rel="modulepreload" crossorigin href="/assets/api-U2JGCNVy.js">
+    <link rel="modulepreload" crossorigin href="/assets/api-ByfVv2Rx.js">
     <link rel="modulepreload" crossorigin href="/assets/store-BoG6C2RK.js">
     <link rel="modulepreload" crossorigin href="/assets/httpStatus-631afCKX.js">
-    <link rel="modulepreload" crossorigin href="/assets/api-state-B5xppwI2.js">
+    <link rel="modulepreload" crossorigin href="/assets/api-state-Dke4qOKn.js">
     <link rel="modulepreload" crossorigin href="/assets/AuthContext-iTKuxK9R.js">
     <link rel="modulepreload" crossorigin href="/assets/AppDialog-DLr-nN64.js">
+    <link rel="modulepreload" crossorigin href="/assets/preload-helper-Czpn1I53.js">
     <link rel="stylesheet" crossorigin href="/assets/index-C06fHq60.css">
   <link rel="manifest" href="/manifest.webmanifest">  <meta property="og:site_name" content="Navodaya Alumni App" />
     <meta property="og:url" content="https://nvsalumni.in/privacy" />
@@ -109,19 +117,58 @@
     <link rel="canonical" href="https://nvsalumni.in/privacy" />
   </head>
   <body>
-    <!-- Splash screen — visible while JS bundle loads, removed by React -->
+    <!-- Splash screen — visible while JS bundle loads, removed by React.
+         The name/tagline are hard-coded as the default branding so the raw HTML always
+         carries the app name (crawlers and reviewers that don't run JS see it); the script
+         below overwrites them from site.config.js when the site is rebranded. -->
     <div id="splash">
       <img id="splash-logo" alt="Logo" />
-      <div class="splash-name" id="splash-name"></div>
-      <div class="splash-tagline" id="splash-tagline"></div>
+      <div class="splash-name" id="splash-name">Navodaya Alumni App</div>
+      <div class="splash-tagline" id="splash-tagline">Connecting Navodayans!</div>
     </div>
     <script>
       // Populate splash from runtime config (already loaded above)
       var c = window.SITE_CONFIG || {};
       document.getElementById('splash-logo').src = c.siteLogo || '';
-      document.getElementById('splash-name').textContent = c.siteName || '';
-      document.getElementById('splash-tagline').textContent = c.siteTagline || '';
+      if (c.siteName) document.getElementById('splash-name').textContent = c.siteName;
+      if (c.siteTagline) document.getElementById('splash-tagline').textContent = c.siteTagline;
     </script>
+    <noscript>
+      <!-- Without JavaScript the SPA never mounts, leaving a blank page that explains nothing.
+           This static summary keeps the home page self-describing for visitors, crawlers and
+           app-review tooling that don't execute scripts. -->
+      <div style="max-width: 720px; margin: 0 auto; padding: 24px; font-family: 'Roboto', sans-serif; color: #202124;">
+        <h1 style="font-size: 1.75rem; margin-bottom: 8px;">Navodaya Alumni App</h1>
+        <p style="color: #5f6368; margin-top: 0;">
+          The alumni network for Jawahar Navodaya Vidyalaya students, ex-students and staff.
+        </p>
+        <p>
+          Navodaya Alumni App is a free, privacy-focused platform that helps Navodayans find each other
+          again. Create a profile, search the alumni directory, reconnect with your batchmates, discover
+          businesses run by fellow alumni, and register for alumni events — all in one place.
+        </p>
+        <ul>
+          <li>Find alumni by name, school, batch or location.</li>
+          <li>See everyone from your JNV and entry year in one place.</li>
+          <li>Browse and list businesses run by Navodayans.</li>
+          <li>Find alumni events, register and check in at the venue.</li>
+          <li>Carry a verifiable digital alumni identity.</li>
+          <li>Control what other members can see about you.</li>
+        </ul>
+        <p>
+          Signing in needs no password: use a one-time code sent to your email, an authenticator app, or
+          Sign in with Google. Google sign-in is used only to confirm that the email address belongs to
+          you — we request nothing beyond your name, email address and profile picture.
+        </p>
+        <p>
+          <a href="/about">About</a> &middot;
+          <a href="/privacy">Privacy policy</a> &middot;
+          <a href="/disclaimer">Terms of service</a> &middot;
+          <a href="/login">Sign in</a>
+        </p>
+        <p style="color: #5f6368;">Please enable JavaScript to use the full app.</p>
+      </div>
+    </noscript>
     <div id="root"></div>
   </body>
 </html>

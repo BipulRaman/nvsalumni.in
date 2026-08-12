@@ -1,0 +1,1 @@
+import{t as e}from"./NotFound-Pe_opE_R.js";var t=e;export{t as component};
