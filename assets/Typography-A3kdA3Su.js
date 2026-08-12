@@ -1,1 +1,0 @@
-import{At as e,ht as t}from"./mui-core-CkVHs32U.js";import{E as n}from"./index-FS-_WQU0.js";var r=e(),i=e=>(0,r.jsx)(t,{variant:`h5`,sx:{fontWeight:n.medium,color:`text.primary`,mb:2},...e}),a=e=>(0,r.jsx)(t,{variant:`h6`,sx:{fontWeight:n.medium,color:`text.primary`,mb:1.5},...e});export{a as n,i as t};
