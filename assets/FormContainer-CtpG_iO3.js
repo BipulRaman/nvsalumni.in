@@ -1,1 +1,0 @@
-import{At as e,x as t}from"./mui-core-CkVHs32U.js";var n=e(),r=e=>{let{sx:r,...i}=e;return(0,n.jsx)(t,{spacing:2,sx:{margin:2,maxWidth:400,...r},...i})};export{r as t};
