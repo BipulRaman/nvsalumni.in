@@ -1,0 +1,1 @@
+import{jt as e}from"./mui-core-CXiXV9Go.js";import{h as t}from"./index-ByY9EG0a.js";import{AttendeeSearch as n}from"./AttendeeSearch-Bc0AkBmY.js";import{t as r}from"./PageTabs-Bs5m5csU.js";var i=e();function a(){return(0,i.jsx)(r,{tabs:t,children:(0,i.jsx)(n,{initialMode:`register`})})}export{a as component};
