@@ -1,1 +1,0 @@
-import{Dt as e,mt as t,nt as n}from"./mui-core-D-mvgYrb.js";var r=e(),i=()=>(0,r.jsx)(n,{sx:{display:`flex`,justifyContent:`center`,alignItems:`center`,minHeight:200},children:(0,r.jsx)(t,{})});export{i as t};
