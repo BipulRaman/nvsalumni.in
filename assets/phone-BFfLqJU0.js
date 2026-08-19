@@ -1,0 +1,1 @@
+var e=e=>{if(!e)return``;let t=e.trim(),n=t.startsWith(`+`)||t.startsWith(`00`),r=t.replace(/\D/g,``);return t.startsWith(`00`)&&(r=r.slice(2)),r=r.replace(/^0+/,``),!n&&r.length===10&&(r=`91${r}`),r.length>=8&&r.length<=15?r:``},t=t=>{let n=e(t);return n?`https://wa.me/${n}`:``},n=t=>{let n=e(t);return n?`tel:+${n}`:``};export{t as n,n as t};
