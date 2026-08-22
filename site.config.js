@@ -9,6 +9,9 @@
  * 2. Replace /branding/logo.webp with the owner's logo
  * 3. Replace /favicon.ico with the owner's favicon
  * 4. Deploy — no rebuild needed
+ *
+ * Exception: the splash-screen logo is inlined into index.html at build time from
+ * src/assets/splash-logo.webp, so it stays the default logo unless you rebuild.
  */
 window.SITE_CONFIG = {
   siteName: "Navodaya Alumni App",

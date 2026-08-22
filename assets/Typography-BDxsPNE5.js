@@ -1,0 +1,1 @@
+import{Dt as e,dt as t}from"./mui-core-C3qabMVQ.js";import{E as n}from"./index-BqOU-CNw.js";var r=e(),i=e=>(0,r.jsx)(t,{variant:`h5`,sx:{fontWeight:n.medium,color:`text.primary`,mb:2},...e}),a=e=>(0,r.jsx)(t,{variant:`h6`,sx:{fontWeight:n.medium,color:`text.primary`,mb:1.5},...e});export{a as n,i as t};
