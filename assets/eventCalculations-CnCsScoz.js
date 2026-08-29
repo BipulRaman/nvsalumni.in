@@ -1,1 +1,0 @@
-var e=e=>{if(!e)return 0;let t=0,n=e.split(`,`);for(let e of n){let n=e.trim().split(`@`);if(n.length===2){let e=parseInt(n[0]);isNaN(e)||(t+=e)}}return t};export{e as t};
