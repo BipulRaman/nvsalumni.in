@@ -1,0 +1,1 @@
+import{kt as e}from"./mui-core-B6EilUdx.js";import{i as t}from"./router-BKqLT9kZ.js";var n=e(),r=()=>(0,n.jsx)(t,{});export{r as component};

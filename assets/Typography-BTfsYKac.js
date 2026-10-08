@@ -1,0 +1,1 @@
+import{kt as e,pt as t}from"./mui-core-B6EilUdx.js";import{E as n}from"./index-DFAA8-1N.js";var r=e(),i=e=>(0,r.jsx)(t,{variant:`h5`,sx:{fontWeight:n.medium,color:`text.primary`,mb:2},...e}),a=e=>(0,r.jsx)(t,{variant:`h6`,sx:{fontWeight:n.medium,color:`text.primary`,mb:1.5},...e});export{a as n,i as t};

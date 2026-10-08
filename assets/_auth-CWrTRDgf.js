@@ -1,1 +1,0 @@
-import{Ot as e}from"./mui-core-C8ps_kDZ.js";import{i as t}from"./router-DGnLbHhl.js";var n=e(),r=()=>(0,n.jsx)(t,{});export{r as component};
